@@ -3,7 +3,11 @@ import { Progress } from "antd";
 import "../styles.css";
 
 const WeatherInfo = ({ weatherData }) => {
-  const temp = weatherData.main.temp;
+  var temp = weatherData.main.temp;
+  if(temp > 273){
+    temp = temp - 273
+  }
+  var newTemp = temp.toFixed(2)
   const weatherDescription = weatherData.weather[0].description;
   const humidity = weatherData.main.humidity;
   const pressure = weatherData.main.pressure;
@@ -30,8 +34,8 @@ const WeatherInfo = ({ weatherData }) => {
             </div>
             <b className="text-sm sm:text-lg">{weatherDescription}</b>
           </div>
-          <div className="text-sm sm:text-3xl absolute right-2 top-2" style={{ color: "white" }}>
-            {temp}
+          <div className="text-2xl sm:text-3xl absolute right-2 top-2" style={{ color: "white" }}>
+            {newTemp}
             <sup>°C</sup>
           </div>
           <div></div>

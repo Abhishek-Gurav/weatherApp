@@ -9,11 +9,11 @@ import showerrain from "./images/showerrain.jpeg";
 import mist from "./images/mist.webp";
 import "./styles.css";
 const WeatherApp = () => {
+  const [cityName, setCityName] = useState("");
   const [weatherData, setWeatherData] = useState(null);
   const [error, setError] = useState(null);
 
-
-  const appId = "0f871056c1dab081a447965f8702e88a"; // Your OpenWeatherMap API Key
+  const appId = "260eced213cca0265d51fc50e4ab362a";
 
   const fetchWeatherData = async (url) => {
     try {
@@ -26,8 +26,9 @@ const WeatherApp = () => {
     }
   };
 
-  const handleCityNameSubmit = (value) => {
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${value}&appid=${appId}&units=metric`;
+  const handleCityNameSubmit = (e) => {
+    e.preventDefault();
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${appId}`;
     fetchWeatherData(url);
   };
 
@@ -75,22 +76,28 @@ const WeatherApp = () => {
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center center",
-        minHeight: "100vh"
+        minHeight: "100vh",
       }}
       className=" flex flex-col justify-start items-center"
     >
       <div className="lg:px-20 px-5">
         <div className="container mx-auto flex justify-center items-center">
-          <div className="p-8 rounded-lg text-center flex">
-                  <input
-                    type="text"
-                    className="w-full px-1 py-0.5 my-2"
-                    onChange={(e) => {
-                      handleCityNameSubmit(e.target.value)
-                    }}
-                    placeholder="Enter city name"
-                  />
-                  <i onClick={handleLocationSubmit} className="material-icons text-4xl">location_on</i>
+          <div className="p-8 rounded-lg text-center">
+            <form className="flex" onSubmit={(e) => handleCityNameSubmit(e)}>
+              <input
+                type="text"
+                className="w-full px-1 py-0.5 my-2 placeholder-slate-500"
+                value={cityName}
+                onChange={(e) => setCityName(e.target.value)}
+                placeholder="Enter city name"
+              />
+              <i
+                onClick={handleLocationSubmit}
+                className="material-icons text-4xl"
+              >
+                location_on
+              </i>
+            </form>
           </div>
         </div>
         {error && <p>{error}</p>}
