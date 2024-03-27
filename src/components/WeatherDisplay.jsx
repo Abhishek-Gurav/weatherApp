@@ -1,4 +1,5 @@
 import React from "react";
+import { Typography, Row, Col, Statistic, Progress } from "antd";
 import clouds from "../images/fewclouds.webp";
 import clearsky from "../images/clearsky.webp";
 import thunderstorm from "../images/thunderstorm.webp";
@@ -7,28 +8,21 @@ import showerrain from "../images/showerrain.jpeg";
 import mist from "../images/mist.webp";
 import "../styles.css";
 
+const { Title } = Typography;
+
 const WeatherInfo = ({ weatherData }) => {
-  // Destructure weatherData object
-  console.log(weatherData);
-  var temp = weatherData.main.temp;
-
+  const temp = weatherData.main.temp;
   const weatherDescription = weatherData.weather[0].description;
-
   const humidity = weatherData.main.humidity;
-
   const pressure = weatherData.main.pressure;
-
   const windSpeed = weatherData.wind.speed;
-
-  const imgUrl =
-    "http://openweathermap.org/img/wn/" +
-    weatherData.weather[0].icon +
-    "@2x.png";
   const cityName = weatherData.name;
   const country = weatherData.sys.country;
   const condition = weatherData.weather[0].main;
 
-  // Function to set background image dynamically based on condition
+  const imgUrl = `http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`;
+
+  // Function to set icon based on condition
   const setBackgroundImage = () => {
     switch (condition) {
       case "Clouds":
@@ -61,23 +55,21 @@ const WeatherInfo = ({ weatherData }) => {
           minHeight: "15vw",
         }}
       >
-        <div className="first">
-          <h1 className="text-4xl text-white md:text-5xl lg:text-6xl">
-            {temp}
-            <sup className="text-lg md:text-xl lg:text-2xl">°C</sup>
-          </h1>
-        </div>
-        <div className="flex flex-col  second">
-          <h1 className="text-2xl m-2 text-white md:text-3lg lg:text-4xl">
-            {cityName}
-          </h1>
-          <h1 className="text-2xl m-2 text-white md:text-3lg lg:text-4xl">
-            {country}
-          </h1>
-          <h1 className="text-2xl m-2 text-white md:text-3lg lg:text-4xl">
-            {condition}
-          </h1>
-        </div>
+        <Row className="w-full flex flex-row justify-around items-center" >
+          <Col>
+            <Title level={1} style={{ color: "white" }}>
+              {temp}
+              <sup style={{ fontSize: "1.5rem" }}>°C</sup>
+            </Title>
+          </Col>
+          <Col>
+            <div>
+              <Title level={3} style={{ color: "white" }}>{cityName}</Title>
+              <Title level={3} style={{ color: "white" }}>{country}</Title>
+              <Title level={3} style={{ color: "white" }}>{condition}</Title>
+            </div>
+          </Col>
+        </Row>
       </div>
       <div
         className="w-full mt-10 p-10 flex flex-wrap gap-16 justify-around items-center text-center"
@@ -85,25 +77,22 @@ const WeatherInfo = ({ weatherData }) => {
           backgroundColor: "#DAEAF1",
         }}
       >
-        <div className="one">
-          <img src={imgUrl} width="100%" alt="" />
-          <b className="text-lg">{weatherDescription}</b>
-        </div>
-        <div className="one">
-          <i className="material-icons text-4xl">opacity</i>
-          <h3 className="text-lg">Humidity</h3>
-          <h2 className="text-lg">{humidity}</h2>
-        </div>
-        <div className="one">
-          <i className="material-icons text-4xl">insights</i>
-          <h3 className="text-lg">Pressure</h3>
-          <h2 className="text-lg">{pressure}</h2>
-        </div>
-        <div className="one">
-          <i className="material-icons text-4xl">air</i>
-          <h3 className="text-lg">Wind Speed</h3>
-          <h2 className="text-lg">{windSpeed}</h2>
-        </div>
+        <Row className="w-full flex flex-row justify-around items-center">
+          <Col span={6}>
+            <img src={imgUrl} alt="" width="100%" />
+            <b className="text-lg">{weatherDescription}</b>
+          </Col>
+          <Col span={6}>
+            <p className="mb-2 text-gray-500">Humidity</p>
+            <Progress type="circle" percent={humidity} size="small" />
+          </Col>
+          <Col span={6}>
+            <Statistic title="Pressure" value={pressure} suffix="hPa" />
+          </Col>
+          <Col span={6}>
+            <Statistic title="Wind Speed" value={windSpeed} suffix="m/s" />
+          </Col>
+        </Row>
       </div>
     </>
   );
