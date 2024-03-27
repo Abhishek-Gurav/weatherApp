@@ -12,10 +12,6 @@ const WeatherInfo = ({ weatherData }) => {
   console.log(weatherData);
   var temp = weatherData.main.temp;
 
-  const minTemp = weatherData.main.temp_min;
-
-  const maxTemp = weatherData.main.temp_max;
-
   const weatherDescription = weatherData.weather[0].description;
 
   const humidity = weatherData.main.humidity;
