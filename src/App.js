@@ -28,7 +28,7 @@ const WeatherApp = () => {
 
   const handleCityNameSubmit = (e) => {
     e.preventDefault();
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${appId}`;
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${appId}&units=metric`;
     fetchWeatherData(url);
   };
 
