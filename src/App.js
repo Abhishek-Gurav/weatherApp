@@ -9,7 +9,6 @@ import showerrain from "./images/showerrain.jpeg";
 import mist from "./images/mist.webp";
 import "./styles.css";
 const WeatherApp = () => {
-  const [cityName, setCityName] = useState("");
   const [weatherData, setWeatherData] = useState(null);
   const [error, setError] = useState(null);
 
@@ -27,9 +26,8 @@ const WeatherApp = () => {
     }
   };
 
-  const handleCityNameSubmit = (e) => {
-    console.log(cityName)
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${appId}&units=metric`;
+  const handleCityNameSubmit = (value) => {
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${value}&appid=${appId}&units=metric`;
     fetchWeatherData(url);
   };
 
@@ -70,11 +68,6 @@ const WeatherApp = () => {
         return mist;
     }
   };
-
-  useEffect(() => {
-    handleCityNameSubmit()
-  }, [cityName])
-  
   return (
     <div
       style={{
@@ -91,10 +84,9 @@ const WeatherApp = () => {
           <div className="p-8 rounded-lg text-center flex">
                   <input
                     type="text"
-                    value={cityName}
                     className="w-full px-1 py-0.5 my-2"
                     onChange={(e) => {
-                      setCityName(e.target.value);
+                      handleCityNameSubmit(e.target.value)
                     }}
                     placeholder="Enter city name"
                   />
