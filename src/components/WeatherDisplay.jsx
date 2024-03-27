@@ -55,7 +55,7 @@ const WeatherInfo = ({ weatherData }) => {
           minHeight: "15vw",
         }}
       >
-        <Row className="w-full flex flex-row justify-around items-center" >
+        <Row className="w-full flex flex-row justify-around items-center">
           <Col>
             <Title level={1} style={{ color: "white" }}>
               {temp}
@@ -64,9 +64,15 @@ const WeatherInfo = ({ weatherData }) => {
           </Col>
           <Col>
             <div>
-              <Title level={3} style={{ color: "white" }}>{cityName}</Title>
-              <Title level={3} style={{ color: "white" }}>{country}</Title>
-              <Title level={3} style={{ color: "white" }}>{condition}</Title>
+              <Title level={3} style={{ color: "white" }}>
+                {cityName}
+              </Title>
+              <Title level={3} style={{ color: "white" }}>
+                {country}
+              </Title>
+              <Title level={3} style={{ color: "white" }}>
+                {condition}
+              </Title>
             </div>
           </Col>
         </Row>
@@ -77,22 +83,25 @@ const WeatherInfo = ({ weatherData }) => {
           backgroundColor: "#DAEAF1",
         }}
       >
-        <Row className="w-full flex flex-row justify-around items-center">
-          <Col span={6}>
-            <img src={imgUrl} alt="" width="100%" />
-            <b className="text-lg">{weatherDescription}</b>
-          </Col>
-          <Col span={6}>
-            <p className="mb-2 text-gray-500">Humidity</p>
-            <Progress type="circle" percent={humidity} size="small" />
-          </Col>
-          <Col span={6}>
-            <Statistic title="Pressure" value={pressure} suffix="hPa" />
-          </Col>
-          <Col span={6}>
-            <Statistic title="Wind Speed" value={windSpeed} suffix="m/s" />
-          </Col>
-        </Row>
+        <div className="one">
+          <img src={imgUrl} width="100%" alt="" />
+          <b className="text-lg">{weatherDescription}</b>
+        </div>
+        <div className="one">
+          <i className="material-icons text-4xl">opacity</i>
+          <h3 className="text-lg">Humidity</h3>
+          <Progress type="circle"  percent={humidity} size="small" />
+        </div>
+        <div className="one">
+          <i className="material-icons text-4xl">insights</i>
+          <h3 className="text-lg">Pressure</h3>
+          <h2 className="text-lg">{pressure}</h2>
+        </div>
+        <div className="one">
+          <i className="material-icons text-4xl">air</i>
+          <h3 className="text-lg">Wind Speed</h3>
+          <h2 className="text-lg">{windSpeed}</h2>
+        </div>
       </div>
     </>
   );
