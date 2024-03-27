@@ -1,8 +1,6 @@
 import React from "react";
-import { Typography, Progress } from "antd";
+import { Progress } from "antd";
 import "../styles.css";
-
-const { Title } = Typography;
 
 const WeatherInfo = ({ weatherData }) => {
   const temp = weatherData.main.temp;

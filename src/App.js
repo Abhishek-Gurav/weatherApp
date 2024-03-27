@@ -109,19 +109,3 @@ const WeatherApp = () => {
 };
 
 export default WeatherApp;
-
-// {selectedOption === "location" && (
-//               <>
-//                 <h1 className="text-green-500 text-4xl font-bold mb-8">
-//                   Check Weather
-//                 </h1>
-//                 <form onSubmit={handleLocationSubmit}>
-//                   <button
-//                     className="w-full py-0.5 rounded bg-black text-white"
-//                     type="submit"
-//                   >
-//                     Get Weather
-//                   </button>
-//                 </form>
-//               </>
-//             )} 
