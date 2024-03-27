@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography, Row, Col, Statistic, Progress } from "antd";
+import { Typography, Row, Col, Progress } from "antd";
 import clouds from "../images/fewclouds.webp";
 import clearsky from "../images/clearsky.webp";
 import thunderstorm from "../images/thunderstorm.webp";
