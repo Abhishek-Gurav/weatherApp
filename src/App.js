@@ -11,6 +11,7 @@ import "./styles.css";
 const WeatherApp = () => {
   const [cityName, setCityName] = useState("");
   const [weatherData, setWeatherData] = useState(null);
+  const [weatherForecast, setWeatherForecast] = useState(null);
   const [error, setError] = useState(null);
 
   const appId = "260eced213cca0265d51fc50e4ab362a";
@@ -25,11 +26,23 @@ const WeatherApp = () => {
       setWeatherData(null);
     }
   };
-
-  const handleCityNameSubmit = (e) => {
+  const fetchWeatherForecast = async (url) => {
+    try {
+      const response = await axios.get(url);
+      const multiplesOfEight = response.data.list.filter((item, index) => index % 8 === 0);
+      setWeatherForecast(multiplesOfEight);
+      setError(null);
+    } catch (error) {
+      setError("Error fetching weather data.");
+      setWeatherForecast(null);
+    }
+  };
+  const handleCityNameSubmit = async (e) => {
     e.preventDefault();
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${appId}&units=metric`;
+    const url2 = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${appId}&units=metric`
     fetchWeatherData(url);
+    fetchWeatherForecast(url2);
   };
 
   const handleLocationSubmit = async (e) => {
@@ -43,8 +56,10 @@ const WeatherApp = () => {
       const { latitude, longitude } = position.coords;
 
       const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${appId}&units=metric`;
+      const url2 = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${appId}&units=metric`
 
       fetchWeatherData(url);
+      fetchWeatherForecast(url2);
     } catch (error) {
       // Handle errors, such as when the user denies location access
       setError("Error accessing location. Please allow location access.");
@@ -101,7 +116,7 @@ const WeatherApp = () => {
           </div>
         </div>
         {error && <p>{error}</p>}
-        {weatherData && <WeatherDisplay weatherData={weatherData} />}
+        {weatherData && <WeatherDisplay weatherData={weatherData} weatherForecast={weatherForecast} />}
       </div>
     </div>
   );
