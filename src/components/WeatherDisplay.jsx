@@ -79,12 +79,7 @@ const WeatherInfo = ({ weatherData , weatherForecast }) => {
           <div className="flex flex-col justify-around">
             <i className="material-icons text-4sm">opacity</i>
             <h3 className="text-sm lg:text-lg">Humidity</h3>
-            <Progress
-              strokeColor={"#fff"}
-              type="circle"
-              percent={humidity}
-              size="small"
-            />
+            <h2 className="text-sm lg:text-lg">{humidity} %</h2>
           </div>
           <div className="one">
             <i className="material-icons text-4sm">insights</i>
