@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Progress } from "antd";
 import { LineChart } from "@mui/x-charts/LineChart";
 
 import "../styles.css";
